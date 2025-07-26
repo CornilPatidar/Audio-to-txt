@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>VoxScribe – Audio to Text</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <h2>🎙 VoxScribe</h2>
+      <nav>
+        <a href="#">Dashboard</a>
+        <a href="#">My Files</a>
+        <a href="#">Upload</a>
+        <a href="#">Settings</a>
+      </nav>
+      
+    </aside>
+
+    <main class="main-content">
+      <header>
+        <h1>Convert Audio to Text</h1>
+        <p>Upload your audio file and get a fast, accurate transcript.</p>
+      </header>
+
+      <section class="upload-area">
+        <label for="audio-upload" class="upload-box">
+          <input type="file" id="audio-upload" name="audio" accept="audio/*">
+          <span>📂 Choose Audio File</span>
+        </label>
+      </section>
+
+      <section class="transcription">
+        <h2>📝 Transcription</h2>
+        <textarea placeholder="Transcript will appear here..." readonly></textarea>
+      </section>
+
+      <section class="audio-controls">
+        <audio controls id="audio-player">
+          <source src="" id="audio-source">
+          Your browser does not support the audio element.
+        </audio>
+      </section>
+    </main>
+  </div>
+</body>
+<script src="script.js"></script>
+</html>
