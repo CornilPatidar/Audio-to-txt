@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: audiotextly
+    env: python
+    plan: free
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: bash backend/start.sh
+    envVars:
+      - key: WHISPER_MODEL
+        value: base
+    autoDeploy: true
+    buildFilter:
+      paths:
+        - backend/**
