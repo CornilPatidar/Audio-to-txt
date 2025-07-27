@@ -7,6 +7,7 @@ services:
        chmod +x backend/start.sh
        pip install -r backend/requirements.txt
     startCommand: bash backend/start.sh
+    pythonVersion: 3.10
     envVars:
       - key: WHISPER_MODEL
         value: tiny
