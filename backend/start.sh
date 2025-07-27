@@ -1,5 +1,7 @@
 #!/bin/bash
-# export PYTHONUNBUFFERED=true
-cd backend
-python3 transcribe_server.py
 
+# Activate backend dir
+cd "$(dirname "$0")"
+
+# Start the Flask server
+python3 transcribe_server.py
