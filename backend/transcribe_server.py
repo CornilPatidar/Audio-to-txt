@@ -42,6 +42,10 @@ def transcribe():
             os.remove(filepath)
             print(f"🧹 Deleted temp file: {filename}")
 
+@app.route('/transcribe', methods=['GET'])
+def transcribe_get():
+    return jsonify({'error': 'GET not supported. Use POST.'}), 405
+
 @app.route('/')
 def root():
     return "✅ AudioTextly is running."
