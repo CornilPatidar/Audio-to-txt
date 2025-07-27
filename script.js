@@ -20,7 +20,7 @@ fileInput.addEventListener('change', async () => {
   formData.append("audio", file);
 
   try {
-    const res = await fetch("http://localhost:10000/transcribe", {
+    const res = await fetch("https://audiotextly.onrender.com/transcribe", {
       method: "POST",
       body: formData,
     });
