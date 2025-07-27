@@ -22,7 +22,7 @@ fileInput.addEventListener('change', async () => {
   try {
         const API_URL = window.location.hostname.includes("localhost")
       ? "http://localhost:10000"
-      : "https://audio-to-txt.vercel.app";
+      : "https://audiotextly.onrender.com/";
 
     const res = await fetch(`${API_URL}/transcribe`, {
       method: "POST",
