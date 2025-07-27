@@ -3,7 +3,9 @@ services:
     name: audiotextly
     env: python
     plan: free
-    buildCommand: pip install -r backend/requirements.txt
+    buildCommand: |
+      chmod +x backend/start.sh
+      pip install -r backend/requirements.txt
     startCommand: bash backend/start.sh
     envVars:
       - key: WHISPER_MODEL
