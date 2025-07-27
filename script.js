@@ -22,7 +22,7 @@ fileInput.addEventListener('change', async () => {
   try {
     const API_URL = window.location.hostname.includes("localhost")
       ? "http://localhost:10000"
-      : "https://audio-to-text.onrender.com"; // ❌ remove trailing slash
+      : "https://audio-to-txt.onrender.com"; // ❌ remove trailing slash
 
     const res = await fetch(`${API_URL}/transcribe`, {
       method: "POST",
@@ -43,7 +43,7 @@ fileInput.addEventListener('change', async () => {
 🔍 Debug Info:
 • API: ${window.location.hostname.includes("localhost")
           ? "http://localhost:10000/transcribe"
-          : "https://audio-to-text.onrender.com/transcribe"}
+          : "https://audio-to-txt.onrender.com/transcribe"}
 • Time: ${new Date().toLocaleString()}
 `;
 
