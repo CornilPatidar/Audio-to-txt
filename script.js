@@ -20,7 +20,11 @@ fileInput.addEventListener('change', async () => {
   formData.append("audio", file);
 
   try {
-    const res = await fetch("https://audio-to-txt.vercel.app/transcribe", {
+        const API_URL = window.location.hostname.includes("localhost")
+      ? "http://localhost:10000"
+      : "https://audio-to-txt.vercel.app";
+
+    const res = await fetch(`${API_URL}/transcribe`, {
       method: "POST",
       body: formData,
     });
