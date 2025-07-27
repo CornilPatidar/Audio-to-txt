@@ -4,12 +4,12 @@ services:
     env: python
     plan: free
     buildCommand: |
-      chmod +x backend/start.sh
-      pip install -r backend/requirements.txt
+       chmod +x backend/start.sh
+       pip install -r backend/requirements.txt
     startCommand: bash backend/start.sh
     envVars:
       - key: WHISPER_MODEL
-        value: base
+        value: tiny
     autoDeploy: true
     buildFilter:
       paths:

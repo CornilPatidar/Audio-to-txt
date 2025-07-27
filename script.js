@@ -20,23 +20,35 @@ fileInput.addEventListener('change', async () => {
   formData.append("audio", file);
 
   try {
-        const API_URL = window.location.hostname.includes("localhost")
+    const API_URL = window.location.hostname.includes("localhost")
       ? "http://localhost:10000"
-      : "https://audiotextly.onrender.com/";
+      : "https://audio-to-text.onrender.com"; // ❌ remove trailing slash
 
     const res = await fetch(`${API_URL}/transcribe`, {
       method: "POST",
       body: formData,
     });
 
-    // 🔒 check response status before parsing
     if (!res.ok) {
       throw new Error(`Server returned ${res.status} (${res.statusText})`);
     }
 
     const data = await res.json();
     transcriptionTextArea.value = data.text || "❌ Transcription failed.";
+    
   } catch (err) {
-    transcriptionTextArea.value = "⚠️ Error: " + err.message;
+    const debug = `
+⚠️ Error: ${err.message}
+
+🔍 Debug Info:
+• API: ${window.location.hostname.includes("localhost")
+          ? "http://localhost:10000/transcribe"
+          : "https://audio-to-text.onrender.com/transcribe"}
+• Time: ${new Date().toLocaleString()}
+`;
+
+    transcriptionTextArea.value = debug;
+    console.error("🧠 Transcription Error:", err);
   }
+
 });

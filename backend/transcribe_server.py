@@ -4,6 +4,7 @@ import whisper
 import os
 from werkzeug.utils import secure_filename
 
+
 # Init Flask
 app = Flask(__name__)
 app.config['PROPAGATE_EXCEPTIONS'] = True

@@ -1,7 +1,6 @@
-flask
-openai-whisper
-ffmpeg-python
-werkzeug
 Flask
 flask-cors
+openai-whisper
 whisper-timestamped
+ffmpeg-python
+werkzeug
