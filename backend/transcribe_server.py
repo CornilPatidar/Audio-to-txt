@@ -41,5 +41,5 @@ def transcribe():
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 10000))  # Use PORT from env if provided
-    print("🚀 Starting server on http://localhost:5000")
+    print("🚀 Starting server on http://localhost:10000")
     app.run(host="0.0.0.0", port=port)
