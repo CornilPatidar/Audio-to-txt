@@ -10,7 +10,9 @@ app.config['PROPAGATE_EXCEPTIONS'] = True
 CORS(app, resources={r"/*": {"origins": "*"}})  # Allow all origins
 
 # Load Whisper model (can switch to 'small', 'medium', 'large')
-model = whisper.load_model("base")
+model_size = os.environ.get("WHISPER_MODEL", "base")
+print(f"🧠 Loading Whisper model: {model_size}")
+model = whisper.load_model(model_size)
 
 # Ensure upload folder exists
 UPLOAD_FOLDER = "uploads"
