@@ -4,17 +4,17 @@ import whisper
 import os
 from werkzeug.utils import secure_filename
 
-# Initialize Flask app and configure CORS
+# Init Flask
 app = Flask(__name__)
 app.config['PROPAGATE_EXCEPTIONS'] = True
-CORS(app, resources={r"/*": {"origins": "*"}})  # Allow all origins
+CORS(app, resources={r"/*": {"origins": "*"}})
 
-# Load Whisper model (can switch to 'small', 'medium', 'large')
-model_size = os.environ.get("WHISPER_MODEL", "base")
+# Use model from env (default to 'base')
+model_size = os.environ.get("WHISPER_MODEL", "tiny")  # use tiny for free tier
 print(f"🧠 Loading Whisper model: {model_size}")
 model = whisper.load_model(model_size)
 
-# Ensure upload folder exists
+# Upload folder
 UPLOAD_FOLDER = "uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
@@ -41,5 +41,11 @@ def transcribe():
             os.remove(filepath)
             print(f"🧹 Deleted temp file: {filename}")
 
+@app.route('/')
+def root():
+    return "✅ AudioTextly is running."
+
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 10000)))
+    port = int(os.environ.get("PORT", 10000))
+    print(f"🚀 Running on port {port}...")
+    app.run(host='0.0.0.0', port=port)
