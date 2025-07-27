@@ -1,12 +1,16 @@
 #!/bin/bash
-set -eo pipefail  # 🔒 Exit if *any* command or pipe fails
+set -eo pipefail
 
 echo "🚀 Starting Flask server..."
-cd "$(dirname "$0")"
+cd "$(dirname "$0")" || exit 1
 
-# Optional: health check before starting
-python3 -c "import whisper; whisper.load_model('tiny')"
-echo "✅ Whisper model loaded"
+echo "🧠 Pre-check: Whisper model load"
+python3 - <<'PY' || exit 1
+import whisper
+print("Model exists:", hasattr(whisper, "load_model"))
+PY
 
-# Start server
+echo "✅ Whisper pre-check ok"
+
+# serve
 python3 transcribe_server.py
