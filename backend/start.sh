@@ -1,7 +1,12 @@
 #!/bin/bash
-echo "Starting Flask server..."
-# Activate backend dir
+set -eo pipefail  # 🔒 Exit if *any* command or pipe fails
+
+echo "🚀 Starting Flask server..."
 cd "$(dirname "$0")"
 
-# Start the Flask server
+# Optional: health check before starting
+python3 -c "import whisper; whisper.load_model('tiny')"
+echo "✅ Whisper model loaded"
+
+# Start server
 python3 transcribe_server.py
