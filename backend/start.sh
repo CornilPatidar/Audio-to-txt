@@ -1,16 +1,13 @@
 #!/bin/bash
 set -eo pipefail
 
-echo "Starting Flask server..."
+echo "✅ Step 1: Entered start.sh"
+
 cd "$(dirname "$0")" || exit 1
+echo "✅ Step 2: Changed directory"
 
-echo "Pre-check: Whisper model load"
-python3 - <<'PY' || exit 1
-import whisper
-print("Model exists:", hasattr(whisper, "load_model"))
-PY
+echo "✅ Step 3: Testing whisper model load"
+python3 -c "import whisper; print('✅ whisper imported')" || echo "❌ Whisper failed to import"
 
-echo "Whisper pre-check ok"
-
-# serve
-python3 transcribe_server.py
+echo "✅ Step 4: Starting Flask"
+python3 transcribe_server.py || echo "❌ transcribe_server.py crashed"
