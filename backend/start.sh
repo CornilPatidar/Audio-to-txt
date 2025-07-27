@@ -1,5 +1,5 @@
 #!/bin/bash
-
+echo "Starting Flask server..."
 # Activate backend dir
 cd "$(dirname "$0")"
 
