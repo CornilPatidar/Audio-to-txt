@@ -20,7 +20,7 @@ fileInput.addEventListener('change', async () => {
   formData.append("audio", file);
 
   try {
-    const res = await fetch("https://audiotextly.onrender.com/transcribe", {
+    const res = await fetch("https://audio-to-txt.vercel.app/transcribe", {
       method: "POST",
       body: formData,
     });
