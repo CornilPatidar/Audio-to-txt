@@ -4,4 +4,4 @@
 cd "$(dirname "$0")"
 
 # Start the Flask server
-python transcribe_server.py
+python3 transcribe_server.py
