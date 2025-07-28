@@ -42,7 +42,7 @@ def transcribe():
             os.remove(filepath)
             print(f"🧹 Deleted temp file: {filename}")
 
-@app.route('/transcribe', methods=['GET'])
+@app.route('/transcribe', methods=['GET','HEAD'])
 def transcribe_get():
     return jsonify({'error': 'GET not supported. Use POST.'}), 405
 
