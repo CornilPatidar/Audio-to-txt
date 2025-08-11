@@ -22,8 +22,9 @@ Open a terminal and run:
 ```powershell
 cd "C:\Users\patid\Audio-to-txt\backend"
 py -m pip install -r requirements.txt
+set PORT=10000
 py transcribe_server.py
-# Flask server starts on http://localhost:5000
+# Flask server starts on http://localhost:10000
 ```
 
 ### 2) Frontend (Static Site)
