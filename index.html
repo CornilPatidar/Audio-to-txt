@@ -39,7 +39,9 @@
             <a href="backend/sampleAudio/adjectives1-1.mp3" download
                style="color: #0070c9; text-decoration: none; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 14px; font-weight: 500; cursor: pointer;"
                onmouseover="this.style.textDecoration='underline'"
-               onmouseout="this.style.textDecoration='none'">
+                onmouseout="this.style.textDecoration='none'"
+                onfocus="this.style.textDecoration='underline'"
+                onblur="this.style.textDecoration='none'">
               Download
             </a>
             
@@ -53,7 +55,9 @@
             <a href="backend/sampleAudio/feelings-1.mp3" download
                style="color: #0070c9; text-decoration: none; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 14px; font-weight: 500; cursor: pointer;"
                onmouseover="this.style.textDecoration='underline'"
-               onmouseout="this.style.textDecoration='none'">
+                onmouseout="this.style.textDecoration='none'"
+                onfocus="this.style.textDecoration='underline'"
+                onblur="this.style.textDecoration='none'">
               Download
             </a>
             
@@ -67,7 +71,9 @@
             <a href="backend/sampleAudio/feelings-5.mp3" download
                style="color: #0070c9; text-decoration: none; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 14px; font-weight: 500; cursor: pointer;"
                onmouseover="this.style.textDecoration='underline'"
-               onmouseout="this.style.textDecoration='none'">
+                onmouseout="this.style.textDecoration='none'"
+                onfocus="this.style.textDecoration='underline'"
+                onblur="this.style.textDecoration='none'">
               Download
             </a>
             
@@ -85,6 +91,29 @@
       <section class="transcription">
         <h2>📝 Transcription</h2>
         <textarea placeholder="Transcript will appear here..." readonly></textarea>
+      </section>
+
+      <section class="help">
+        <details id="help-details" style="margin-top: 8px;">
+          <summary style="cursor: pointer; font-weight: 600;">Why didn’t it work?</summary>
+          <div id="help-body" style="margin-top: 8px; font-size: 14px; line-height: 1.5;">
+            If you’re using this on your own computer:
+            <br/>
+            - Start the backend first at http://localhost:10000, then try again.
+            <br/>
+            - Keep your audio short at first (e.g., 10–20 seconds).
+            <br/><br/>
+            If you’re using the hosted demo:
+            <br/>
+            - The free server may be waking up. Wait 30–60 seconds and try again.
+            <br/>
+            - Very long audio can hit time limits. Try a shorter clip.
+            <br/>
+            - You can force a specific API with ?api=, for example:
+            <br/>
+            https://audio-to-txt.vercel.app/?api=https://audio-to-txt.onrender.com
+          </div>
+        </details>
       </section>
 
       <section class="audio-controls">

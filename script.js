@@ -6,15 +6,11 @@ const transcriptionTextArea = document.querySelector('textarea');
 function getCandidateApiBases() {
   const isLocal = ['localhost', '127.0.0.1'].includes(window.location.hostname);
   // URL param override: ?api=https://your-service.onrender.com
-  try {
-    const apiParam = new URLSearchParams(window.location.search).get('api');
-    if (apiParam && apiParam.trim()) {
-      return [apiParam.trim().replace(/\/$/, '')];
-    }
-  } catch (_) {
-    // ignore parsing issues
+  const apiParam = new URLSearchParams(window?.location?.search || '').get('api');
+  if (apiParam?.trim?.()) {
+    return [apiParam.trim().replace(/\/$/, '')];
   }
-  const override = (typeof window !== 'undefined' && window.API_BASE && window.API_BASE.trim()) ? window.API_BASE.trim().replace(/\/$/, '') : '';
+  const override = window?.API_BASE?.trim?.() ? window.API_BASE.trim().replace(/\/$/, '') : '';
   if (override) {
     return [override];
   }
@@ -55,10 +51,11 @@ async function postToFirstWorkingEndpoint(formData) {
       errors.push(`${e.name === 'AbortError' ? 'Timeout' : e.message} at ${url}`);
     }
   }
-  const hint = window.location.hostname.includes('localhost')
-    ? 'Ensure the backend is running on http://localhost:10000 or http://localhost:5000.'
-    : 'Ensure the Render backend URL is correct and reachable.';
-  throw new Error(`All endpoints failed. ${hint}\n\nTried:\n- ${errors.join('\n- ')}`);
+  const failure = new Error('ENDPOINTS_FAILED');
+  failure.name = 'EndpointsFailureError';
+  failure.endpointErrors = errors;
+  failure.isLocal = ['localhost', '127.0.0.1'].includes(window.location.hostname);
+  throw failure;
 }
 
 fileInput.addEventListener('change', async () => {
@@ -81,7 +78,17 @@ fileInput.addEventListener('change', async () => {
     const data = await postToFirstWorkingEndpoint(formData);
     transcriptionTextArea.value = data.text || '❌ Transcription failed.';
   } catch (err) {
-    transcriptionTextArea.value = `⚠️ Could not transcribe.\n\n${err.message}`;
+    if (err && err.name === 'EndpointsFailureError') {
+      const isLocal = err.isLocal;
+      transcriptionTextArea.value = isLocal
+        ? 'Could not reach the transcription server. Please make sure the backend is running on your computer (http://localhost:10000), then try again.'
+        : 'We could not reach the transcription server right now. This can happen when the free server is waking up or if the audio is too long. Please wait 30–60 seconds and try again, or try a shorter clip.';
+      // Open the help details to guide users
+      const help = document.getElementById('help-details');
+      if (help) help.open = true;
+    } else {
+      transcriptionTextArea.value = 'Something went wrong while transcribing. Please try again.';
+    }
     console.error('🧠 Transcription Error:', err);
   }
 });
@@ -116,7 +123,16 @@ document.addEventListener('click', async (e) => {
     const data = await postToFirstWorkingEndpoint(formData);
     transcriptionTextArea.value = data.text || '❌ Transcription failed.';
   } catch (err) {
-    transcriptionTextArea.value = `⚠️ Could not transcribe sample.\n\n${err.message}`;
+    if (err && err.name === 'EndpointsFailureError') {
+      const isLocal = err.isLocal;
+      transcriptionTextArea.value = isLocal
+        ? 'Could not reach the transcription server. Please start the backend locally (http://localhost:10000) and try again.'
+        : 'We could not reach the transcription server right now. The free server may be waking up, or the audio is too long for the time limit. Please wait a minute and try again, or pick a shorter sample.';
+      const help = document.getElementById('help-details');
+      if (help) help.open = true;
+    } else {
+      transcriptionTextArea.value = 'Could not transcribe this sample. Please try again.';
+    }
     console.error('🧠 Sample Transcription Error:', err);
   }
 });
