@@ -8,7 +8,14 @@ from werkzeug.utils import secure_filename
 # Init Flask
 app = Flask(__name__)
 app.config['PROPAGATE_EXCEPTIONS'] = True
-CORS(app, resources={r"/*": {"origins": "*"}})
+# Allow common headers and credentials-less CORS for public API usage
+CORS(
+    app,
+    resources={r"/*": {"origins": "*"}},
+    supports_credentials=False,
+    expose_headers=["Content-Type"],
+    allow_headers=["Content-Type", "Accept"],
+)
 
 # Use model from env (default to 'base')
 model_size = os.environ.get("WHISPER_MODEL", "tiny")  # use tiny for free tier
@@ -19,8 +26,11 @@ model = whisper.load_model(model_size)
 UPLOAD_FOLDER = "uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
-@app.route('/transcribe', methods=['POST'])
+@app.route('/transcribe', methods=['POST', 'OPTIONS'])
 def transcribe():
+    if request.method == 'OPTIONS':
+        # CORS preflight
+        return ('', 204)
     if 'audio' not in request.files:
         return jsonify({'error': 'No audio file provided'}), 400
 

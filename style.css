@@ -16,7 +16,9 @@ body {
   display: flex;
   width: 100%;
 }
-
+a:hover, button:hover {
+  background: linear-gradient(to bottom, #51adf6, #007de5) !important;
+}
 /* Sidebar */
 .sidebar {
   width: 220px;
