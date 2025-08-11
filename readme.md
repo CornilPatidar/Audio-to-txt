@@ -1,22 +1,22 @@
-## VoxScribe — Audio to Text
+## 🎙️VoxScribe — Audio to Text
 
 Convert audio files to text with a simple web UI and a Python (Flask) backend.
 
-### Live Demo
+### 🌐Live Demo
 - [audio-to-txt.vercel.app](https://audio-to-txt.vercel.app/)
 
-## Features
+## ✨Features
 - Fast transcription via Python backend (Flask)
 - Simple browser-based uploader and transcript viewer
 - Works locally or via the hosted demo
 
-## Requirements
+## 🛠️Requirements
 - Python 3.10+
 - Windows PowerShell or Command Prompt
 
-## Quick Start (Local)
+## 🚀Quick Start (Local)
 
-### 1) Backend (Flask)
+### 1) 🖥️Backend (Flask)
 Open a terminal and run:
 
 ```powershell
@@ -27,7 +27,7 @@ py transcribe_server.py
 # Flask server starts on http://localhost:10000
 ```
 
-### 2) Frontend (Static Site)
+### 2) 🌐Frontend (Static Site)
 Open a new terminal and run:
 
 ```powershell
@@ -36,12 +36,12 @@ python -m http.server 5500
 # Frontend available at http://localhost:5500
 ```
 
-### 3) Use the App
+### 3) 🎉Use the App
 Open `http://localhost:5500` in your browser, upload an audio file, and get the transcript.
 
 Tip: After a reboot or terminal close, repeat steps 1 and 2.
 
-## Project Structure
+## 📁Project Structure
 
 ```text
 Audio-to-txt/
